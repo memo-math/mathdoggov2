@@ -1,6 +1,6 @@
 ---
 author: MathDoggo
-pubDatetime: 2022-09-25T15:20:35Z
+pubDatetime: 2026-01-09T15:00:15.170Z
 modDatetime: 2026-01-09T15:00:15.170Z
 title: Introducción a la Teoría de Juegos
 featured: false

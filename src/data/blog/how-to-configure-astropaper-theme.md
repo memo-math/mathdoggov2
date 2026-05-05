@@ -12,7 +12,9 @@ tags:
 description: How you can make AstroPaper theme absolutely yours.
 ---
 
-AstroPaper is a highly customizable Astro blog theme. With AstroPaper, you can customize everything according to your personal taste. This article will explain how you can make some customizations easily in the config file.
+AstroPaper is a highly customizable Astro blog theme. With AstroPaper, you can customize everything according to your personal taste. This article will explain how you can make some customizations easily in the config file. $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+
+$$ \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi} $$
 
 ## Table of contents
 

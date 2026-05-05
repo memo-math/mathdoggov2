@@ -5,6 +5,7 @@ import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
 import { SITE } from "@/config";
 import "@/styles/global.css";
 
+
 type Props = {
   title?: string;
   author?: string;
@@ -79,6 +80,11 @@ const structuredData = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={socialImageURL} />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"
+    />
 
     <!-- Article Published/Modified time -->
     {

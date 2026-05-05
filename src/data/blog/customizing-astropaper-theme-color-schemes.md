@@ -1,148 +1,45 @@
 ---
-author: Sat Naing
+author: MathDoggo
 pubDatetime: 2022-09-25T15:20:35Z
 modDatetime: 2026-01-09T15:00:15.170Z
-title: Customizing AstroPaper theme color schemes
+title: Introducción a la Teoría de Juegos
 featured: false
 draft: false
 tags:
-  - color-schemes
-  - docs
+  - Teoria de juegos
+  - Matematicas Universitarias
+  - Juego
+  - Forma normal
 description:
-  How you can enable/disable light & dark mode; and customize color schemes
-  of AstroPaper theme.
+  Una muy pequeña introducción a la Teoría de Juegos.
 ---
 
-This post will explain how you can enable/disable light & dark mode for the website. Moreover, you'll learn how you can customize color schemes of the entire website.
+La teoría de juegos es una colección de modelos matemáticos que nos ayudan a analizar situaciones donde interactúan múltiples agentes (jugadores) tomando decisiones. Estas decisiones están guiadas por las preferencias de cada jugador. El resultado depende de las decisiones de todos los agentes.
 
-## Table of contents
+Este último detalle es precisamente lo que distingue a la teoría de juegos de los problemas clásicos de optimización, en los que suele existir un único agente, con ciertas restricciones, buscando maximizar o minimizar algún objetivo.
 
-## Enable/disable light & dark mode
+Para estudiar un juego, podemos considerar diferentes grados de cooperación entre los jugadores. Dos casos extremos son los juegos cooperativos, donde los jugadores pueden formar alianzas, y los juegos no cooperativos, donde cada jugador actúa por su cuenta. En esta saga nos enfocaremos exclusivamente en los juegos no cooperativos.
 
-AstroPaper theme will include light and dark mode by default. In other words, there will be two color schemes\_ one for light mode and another for dark mode. This default behavior can be disabled in `SITE` configuration object.
+En este primer post vamos a formalizar lo que significa un juego.
 
-```js file="src/config.ts"
-export const SITE = {
-  website: "https://astro-paper.pages.dev/", // replace this with your deployed domain
-  author: "Sat Naing",
-  profile: "https://satnaing.dev/",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
-  title: "AstroPaper",
-  ogImage: "astropaper-og.jpg",
-  lightAndDarkMode: true, // [!code highlight]
-  postPerIndex: 4,
-  postPerPage: 4,
-  scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
-  showArchives: true,
-  showBackButton: true, // show back button in post detail
-  editPost: {
-    enabled: true,
-    text: "Suggest Changes",
-    url: "https://github.com/satnaing/astro-paper/edit/main/",
-  },
-  dynamicOgImage: true,
-  lang: "en", // html lang code. Set this empty and default will be "en"
-  timezone: "Asia/Bangkok", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-} as const;
-```
+Un juego $G$ es una terna
 
-To disable `light & dark mode` set `SITE.lightAndDarkMode` to `false`.
+$$G=(N, (A^{i}), (u^{i})) \text{ con } i\in N$$
 
-## Choose initial color scheme
+Donde:
 
-By default, if we disable `SITE.lightAndDarkMode`, we will only get system's prefers-color-scheme.
+- $N$ es el conjunto de jugadores,
+- $A^{i}$ es el conjunto de estrategias para el jugador $i$
+- $u^{i}:\prod_{i\in N}A^{i}\rightarrow \mathbb{R}$ es la función de utilidad para el jugador $i$
 
-Thus, to choose an initial color scheme instead of prefers-color-scheme, we have to set color scheme in the `initialColorScheme` variable inside `theme.ts`.
+Es importante aclarar que en los juegos que vamos a estudiar las funciones de utilidad serán ordinales, es decir, solo sirven para distinguir el orden de las preferencias de cada jugador.
 
-```ts file="src/scripts/theme.ts"
-// Initial color scheme
-// Can be "light", "dark", or empty string for system's prefers-color-scheme
-const initialColorScheme = ""; // "light" | "dark" // [!code hl]
+Por ejemplo, si yo soy un jugador y prefiero la estrategia $A$ sobre la estrategia $B$, basta con que $u(A)>u(B)$ no importa la cantidad por la que $u(A)$ sea mayor que $u(B)$.
 
-function getPreferTheme(): string {
-  // get theme data from local storage (user's explicit choice)
-  const currentTheme = localStorage.getItem("theme");
-  if (currentTheme) return currentTheme;
+Por último, cuando todos los jugadores eligen una estrategia podemos formar un conjunto con todas esas estrategias que generalmente se llama perfil de estrategias.
 
-  // return initial color scheme if it is set (site default)
-  if (initialColorScheme) return initialColorScheme;
+Ahora, matemáticamente el espacio de perfiles de estrategias se define como: 
 
-  // return user device's prefer color scheme (system fallback)
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-}
+$$Y = \prod_{i\in N} A^{i}$$ 
 
-// ...
-```
-
-The **initialColorScheme** variable can hold two values\_ `"light"`, `"dark"`. You can leave the empty string (default) if you don't want to specify an initial color scheme.
-
-- `""` - system's prefers-color-scheme. (default)
-- `"light"` - use light mode as initial color scheme.
-- `"dark"` - use dark mode as initial color scheme.
-
-<details>
-<summary>Why initialColorScheme is not inside config.ts?</summary>
-To avoid color flickering on page reload, we have to place the theme initialization JavaScript code as early as possible when the page loads. The theme script is split into two parts: a minimal inline script in the `<head>` that sets the theme immediately, and the full script that loads asynchronously. This approach prevents FOUC (Flash of Unstyled Content) while maintaining optimal performance.
-</details>
-
-## Customize color schemes
-
-Both light & dark color schemes of AstroPaper theme can be customized in the `global.css` file.
-
-```css file="src/styles/global.css"
-@import "tailwindcss";
-@import "./typography.css";
-
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-
-:root,
-html[data-theme="light"] {
-  --background: #fdfdfd;
-  --foreground: #282728;
-  --accent: #006cac;
-  --muted: #e6e6e6;
-  --border: #ece9e9;
-}
-
-html[data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --muted: #343f60bf;
-  --border: #ab4b08;
-}
-/* ... */
-```
-
-In the AstroPaper theme, the `:root` and `html[data-theme="light"]` selectors define the light color scheme, while `html[data-theme="dark"]` defines the dark color scheme.
-
-To customize your own color scheme, specify your light colors inside `:root, html[data-theme="light"]`, and your dark colors inside `html[data-theme="dark"]`.
-
-Here is the detail explanation of color properties.
-
-| Color Property | Definition & Usage                                            |
-| -------------- | ------------------------------------------------------------- |
-| `--background` | Primary color of the website. Usually the main background.    |
-| `--foreground` | Secondary color of the website. Usually the text color.       |
-| `--accent`     | Accent color of the website. Link color, hover color etc.     |
-| `--muted`      | Card and scrollbar background color for hover state etc.      |
-| `--border`     | Border color. Used for border utilities and visual separation |
-
-Here is an example of changing the light color scheme.
-
-```css file="src/styles/global.css"
-/* ... */
-:root,
-html[data-theme="light"] {
-  --background: #f6eee1;
-  --foreground: #012c56;
-  --accent: #e14a39;
-  --muted: #efd8b0;
-  --border: #dc9891;
-}
-/* ... */
-```
-
-> Check out some [predefined color schemes](https://astro-paper.pages.dev/posts/predefined-color-schemes/) AstroPaper has already crafted for you.
+Cada $y\in Y$ es un perfil de estrategias.

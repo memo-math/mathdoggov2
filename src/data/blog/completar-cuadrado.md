@@ -16,7 +16,7 @@ description: Post para comprender cómo completar el cuadrado y su importancia p
 ---
 
 Completar el cuadrado es una técnica de álgebra básica. Su objetivo es transformar una expresión de la forma
-$ax^2 +bx +c$ en otra expresión equivalente de la forma $a(x+h)^{2}+k$. A primera vista, esta transformación parece ser artificial. Sin embargo, es una herramienta fuindamental que nos permite desde resolver ecuaciones cuadráticas hasta simplificar integrales o deducir la famosa fórmula general. 
+$ax^2 +bx +c$ en otra expresión equivalente de la forma $a(x+h)^{2}+k$. A primera vista, esta transformación parece ser artificial. Sin embargo, es una herramienta fundamental que nos permite desde resolver ecuaciones cuadráticas hasta simplificar integrales o deducir la famosa fórmula general. 
 
 ## Procedimiento
 La mejor manera de aprender la técnica es resolviendo un problema concreto.
@@ -25,7 +25,7 @@ Supongamos que queremos resolver la ecuación:
 
 $$x^2+6x+5=0$$
 
-En un primer paso pasemos el término constante del otro lado:
+En un primer paso pasemos el término constante al otro lado:
 
 $$x^2+6x=-5$$
 
@@ -43,7 +43,7 @@ factorizar:
 
 $$(x+3)^2=4$$
 
-Tomando raíz cuadrada en ambos lados tenemos:
+Tomando la raíz cuadrada en ambos lados tenemos:
 
 $$ x + 3 = \pm 2$$
 
@@ -134,6 +134,6 @@ Ahora hacemos un cambio de variable $u = x+5$ entonces $du=dx$ y podemos reescri
 
 $$ \int \frac{dx}{u^2+1} $$
 
-Y normalmente es aquí donde podemos parar y ver que podemos reconocer la forma de la integral y ver que su antiderivada es la función arcotangente, esto con la ayuda de un formulario en caso de ser necesario. Entonces tenemos que el resultado de la integral ya con todo y volviendo a la variable original es:
+Y normalmente es aquí donde podemos parar y reconocer la forma de la integral. Con ayuda de un formulario si es necesario hay que notar que su antiderivada es la función arcotangente. Entonces tenemos que el resultado de la integral regresando a la variable original es:
 
 $$ arctan(x+5) + C $$

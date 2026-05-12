@@ -1,9 +1,9 @@
 ---
 author: MathDoggo
-pubDatetime: 2026-05-12T17:00:00.000Z
-modDatetime: 2026-05-12T17:00:00.000Z
+pubDatetime: 2026-05-11T17:00:00.000Z
+modDatetime: 2026-05-11T17:00:00.000Z
 title: Toolbox I. Completar el cuadrado
-slug: completar el cuadrado
+slug: completar-cuadrado
 featured: true
 draft: false
 tags:
@@ -82,7 +82,7 @@ Por lo anterior sabemos que podemos factorizar fácilmente el lado izquierdo y h
 
 $$ (x+\frac{b}{2a})^2 = \frac{b^2-4ac}{4a^2} $$
 
-Tomando raíz cuadrada:
+Tomando la raíz cuadrada:
 
 $$ x + \frac{b}{2a} = \pm \frac{\sqrt{b^2 - 4ac}}{2a}$$
 
